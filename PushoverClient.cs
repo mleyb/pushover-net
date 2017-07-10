@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace PushoverNet
 {
@@ -15,10 +16,17 @@ namespace PushoverNet
 
         public async Task SendAsync(string userKey, string message)
         {
+            JObject body = new JObject(new
+            {
+                token = _appKey,
+                user = userKey,
+                message = message
+            });
+
             using (var client = new HttpClient())
             {
                 // TODO
-                await client.PostAsync("", new StringContent(""));
+                await client.PostAsync("https://api.pushover.net/1/messages.json", new StringContent(body.ToString()));
             }
         }
     }
