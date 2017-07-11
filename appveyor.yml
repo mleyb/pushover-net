@@ -4,8 +4,18 @@ configuration: Release
 platform: Any CPU
 
 before_build:
-- dotnet restore
-
+  - dotnet --info
+  - dotnet restore
+  
 build:
   project: pushover-net.csproj
   verbosity: normal
+
+after_build:
+  - dotnet pack .\pushover-net.csproj --configuration Release
+  
+#test_script:
+#  - dotnet test .\tests\pushover-net.tests.csproj --configuration Release --logger:trx;LogFileName=tests-results01.xml
+
+artifacts:
+  - path: '**\pushover-net.*.nupkg' # find all NuGet packages recursively
