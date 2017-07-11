@@ -4,7 +4,7 @@ configuration: Release
 platform: Any CPU
 
 before_build:
-  - dotnet restore
+- dotnet restore
 
 build:
-  - dotnet build
+- dotnet build
