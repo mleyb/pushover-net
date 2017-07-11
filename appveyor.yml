@@ -2,6 +2,9 @@ version: 0.0.{build}
 image: Visual Studio 2017
 configuration: Release
 platform: Any CPU
+
+before_build:
+  - dotnet restore
+
 build:
-  project: pushover-net.csproj
-  verbosity: normal
+  - dotnet build
