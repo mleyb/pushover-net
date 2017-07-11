@@ -1,6 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <TargetFramework>netstandard1.4</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Major>0</Major>
+    <Minor>0</Minor>
+    <Revision>1</Revision>
+
+    <BuildNumber Condition=" '$(APPVEYOR_BUILD_NUMBER)' != '' ">$(APPVEYOR_BUILD_NUMBER)</BuildNumber>
+    <BuildNumber Condition=" '$(BUILD_NUMBER)' != '' ">$(BUILD_NUMBER)</BuildNumber>
+    <BuildNumber Condition=" '$(BuildNumber)' == '' ">0</BuildNumber>
+
+    <AssemblyVersion>$(Major).$(Minor).$(Revision).$(BuildNumber)</AssemblyVersion>
+    <AssemblyFileVersion>$(Major).$(Minor).$(Revision).$(BuildNumber)</AssemblyFileVersion>
+    <InformationalVersion>$(Major).$(Minor).$(Revision).$(BuildNumber)</InformationalVersion>
+    <PackageVersion>$(Major).$(Minor).$(Revision).$(BuildNumber)</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
