@@ -5,7 +5,12 @@ using Newtonsoft.Json.Linq;
 
 namespace PushoverNet
 {
-    public class PushoverClient
+    public interface IPushoverClient
+    {
+        Task SendAsync(string userKey, string message);
+    }
+
+    public class PushoverClient : IPushoverClient
     {
         private readonly string _appKey;
 
@@ -25,7 +30,6 @@ namespace PushoverNet
 
             using (var client = new HttpClient())
             {
-                // TODO
                 await client.PostAsync("https://api.pushover.net/1/messages.json", new StringContent(body.ToString()));
             }
         }
