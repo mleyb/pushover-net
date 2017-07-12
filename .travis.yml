@@ -9,9 +9,9 @@ dist: trusty
 dotnet: 1.0.3
   
 before_script:
-  pwd
+  - pwd
   - dotnet --info
-  - dotnet restore /src/PushoverNet/PushoverNet.csproj
+  - dotnet restore src/PushoverNet/PushoverNet.csproj
 
 script:
-  - dotnet build /src/PushoverNet/PushoverNet.csproj
+  - dotnet build src/PushoverNet/PushoverNet.csproj
