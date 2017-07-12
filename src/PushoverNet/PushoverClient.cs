@@ -16,6 +16,9 @@ namespace PushoverNet
 
         public PushoverClient(string appKey)
         {
+            if (String.IsNullOrEmpty(appKey))
+                throw new ArgumentException(nameof(appKey));
+
             _appKey = appKey;
         }
 
