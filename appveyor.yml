@@ -17,8 +17,8 @@ build:
 after_build:
   - dotnet pack .\src\PushoverNet\PushoverNet.csproj --configuration Release
   
-#test_script:
-#  - dotnet test .\tests\pushover-net.tests.csproj --configuration Release --logger:trx;LogFileName=tests-results01.xml
+test_script:
+  - dotnet test .\test\PushoverNet.Test\PushoverNet.Test.csproj --configuration Release --logger:trx;LogFileName=tests-results01.xml
 
 artifacts:
   - path: '**\PushoverNet.*.nupkg' # find all NuGet packages recursively
