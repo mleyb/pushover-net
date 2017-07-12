@@ -18,6 +18,7 @@ after_build:
   - dotnet pack .\src\PushoverNet\PushoverNet.csproj --configuration Release
   
 test_script:
+  - dotnet restore .\test\PushoverNet.Test\PushoverNet.Test.csproj
   - dotnet test .\test\PushoverNet.Test\PushoverNet.Test.csproj --configuration Release --logger:trx;LogFileName=tests-results01.xml
 
 artifacts:
