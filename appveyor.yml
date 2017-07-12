@@ -11,14 +11,14 @@ before_build:
   - dotnet restore
   
 build:
-  project: pushover-net.csproj
+  project: .\src\PushoverNet\PushoverNet.csproj
   verbosity: normal
 
 after_build:
-  - dotnet pack .\pushover-net.csproj --configuration Release
+  - dotnet pack .\src\PushoverNet\PushoverNet.csproj --configuration Release
   
 #test_script:
 #  - dotnet test .\tests\pushover-net.tests.csproj --configuration Release --logger:trx;LogFileName=tests-results01.xml
 
 artifacts:
-  - path: '**\pushover-net.*.nupkg' # find all NuGet packages recursively
+  - path: '**\PushoverNet.*.nupkg' # find all NuGet packages recursively
