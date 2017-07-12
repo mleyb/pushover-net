@@ -10,8 +10,8 @@ dotnet: 1.0.3
   
 before_script:
   - pwd
-  - dotnet --info
   - dotnet restore src/PushoverNet/PushoverNet.csproj
+  - dotnet restore test/PushoverNet.Test/PushoverNet.Test.csproj
 
 script:
   - dotnet build src/PushoverNet/PushoverNet.csproj
