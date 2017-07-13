@@ -18,9 +18,5 @@
     <InformationalVersion>$(Major).$(Minor).$(Revision).$(BuildNumber)</InformationalVersion>
     <PackageVersion>$(Major).$(Minor).$(Revision).$(BuildNumber)</PackageVersion>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="newtonsoft.json" Version="10.0.3" />
-  </ItemGroup>
   
 </Project>
