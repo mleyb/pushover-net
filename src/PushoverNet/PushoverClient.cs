@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace PushoverNet
@@ -24,16 +26,16 @@ namespace PushoverNet
 
         public async Task SendAsync(string userKey, string message)
         {
-            JObject body = new JObject(new
+            var content = new FormUrlEncodedContent(new[] 
             {
-                token = _appKey,
-                user = userKey,
-                message = message
+                new KeyValuePair<string, string>("token", _appKey),
+                new KeyValuePair<string, string>("user", userKey),
+                new KeyValuePair<string, string>("message", message)
             });
 
             using (var client = new HttpClient())
             {
-                await client.PostAsync("https://api.pushover.net/1/messages.json", new StringContent(body.ToString()));
+                await client.PostAsync("https://api.pushover.net/1/messages.json", content);
             }
         }
     }
