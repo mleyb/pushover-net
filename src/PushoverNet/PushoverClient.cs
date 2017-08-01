@@ -7,12 +7,14 @@ namespace PushoverNet
 {
     public interface IPushoverClient
     {
-        Task SendAsync(string userKey, string message);
+        Task SendAsync(string userKey, string message, string title = null, Uri url = null);
     }
 
-    public class PushoverClient : IPushoverClient
+    public class PushoverClient : IPushoverClient, IDisposable
     {
         private readonly string _appKey;
+
+        private readonly HttpClient _client = new HttpClient();
 
         public PushoverClient(string appKey)
         {
@@ -22,19 +24,44 @@ namespace PushoverNet
             _appKey = appKey;
         }
 
-        public async Task SendAsync(string userKey, string message)
+        public async Task SendAsync(string userKey, string message, string title = null, Uri url = null)
         {
-            var content = new FormUrlEncodedContent(new[] 
+            if (String.IsNullOrEmpty(userKey))
+                throw new ArgumentException(nameof(userKey));
+
+            if (String.IsNullOrEmpty(message))
+                throw new ArgumentException(nameof(message));
+
+            var content = new FormUrlEncodedContent(BuildContentParams(userKey, message, title, url)); 
+
+            await _client.PostAsync("https://api.pushover.net/1/messages.json", content);
+        }
+
+        public void Dispose()
+        {
+            _client.Dispose();
+        }
+
+        private List<KeyValuePair<string, string>> BuildContentParams(string userKey, string message, string title = null, Uri url = null)
+        {
+            var contentParams = new List<KeyValuePair<string, string>> 
             {
                 new KeyValuePair<string, string>("token", _appKey),
                 new KeyValuePair<string, string>("user", userKey),
                 new KeyValuePair<string, string>("message", message)
-            });
+            };
 
-            using (var client = new HttpClient())
+            if (title != null)
             {
-                await client.PostAsync("https://api.pushover.net/1/messages.json", content);
+                contentParams.Add(new KeyValuePair<string, string>("title", title));
             }
+
+            if (url != null)
+            {
+                contentParams.Add(new KeyValuePair<string, string>("url", url.ToString()));
+            }
+
+            return contentParams;
         }
     }
 }
