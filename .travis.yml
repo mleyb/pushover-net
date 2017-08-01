@@ -16,3 +16,5 @@ before_script:
 script:
   - dotnet build src/PushoverNet/PushoverNet.csproj
   - dotnet test test/PushoverNet.Test/PushoverNet.Test.csproj
+  - dotnet pack src/PushoverNet/PushoverNet.csproj --configuration Release
+  
