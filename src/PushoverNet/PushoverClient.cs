@@ -33,9 +33,11 @@ namespace PushoverNet
             if (String.IsNullOrEmpty(message))
                 throw new ArgumentException(nameof(message));
 
-            var content = new FormUrlEncodedContent(BuildContentParams(userKey, message, title, url)); 
+            List<KeyValuePair<string, string>> contentParams = BuildContentParams(userKey, message, title, url); 
 
-            HttpResponseMessage response = await _client.PostAsync("https://api.pushover.net/1/messages.json", content);
+            var bodyContent = new FormUrlEncodedContent(contentParams); 
+
+            HttpResponseMessage response = await _client.PostAsync("https://api.pushover.net/1/messages.json", bodyContent);
 
             return response.StatusCode;
         }
