@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -7,7 +8,7 @@ namespace PushoverNet
 {
     public interface IPushoverClient
     {
-        Task SendAsync(string userKey, string message, string title = null, Uri url = null);
+        Task<HttpStatusCode> SendAsync(string userKey, string message, string title = null, Uri url = null);
     }
 
     public class PushoverClient : IPushoverClient, IDisposable
@@ -24,7 +25,7 @@ namespace PushoverNet
             _appKey = appKey;
         }
 
-        public async Task SendAsync(string userKey, string message, string title = null, Uri url = null)
+        public async Task<HttpStatusCode> SendAsync(string userKey, string message, string title = null, Uri url = null)
         {
             if (String.IsNullOrEmpty(userKey))
                 throw new ArgumentException(nameof(userKey));
@@ -34,7 +35,9 @@ namespace PushoverNet
 
             var content = new FormUrlEncodedContent(BuildContentParams(userKey, message, title, url)); 
 
-            await _client.PostAsync("https://api.pushover.net/1/messages.json", content);
+            HttpResponseMessage response = await _client.PostAsync("https://api.pushover.net/1/messages.json", content);
+
+            return response.StatusCode;
         }
 
         public void Dispose()
