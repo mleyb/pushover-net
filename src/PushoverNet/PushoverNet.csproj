@@ -13,6 +13,8 @@
     <BuildNumber Condition=" '$(BUILD_NUMBER)' != '' ">$(BUILD_NUMBER)</BuildNumber>
     <BuildNumber Condition=" '$(BuildNumber)' == '' ">0</BuildNumber>
 
+    <PackageId>PushoverNetStandard</PackageId>
+
     <AssemblyVersion>$(Major).$(Minor).$(Revision).$(BuildNumber)</AssemblyVersion>
     <AssemblyFileVersion>$(Major).$(Minor).$(Revision).$(BuildNumber)</AssemblyFileVersion>
     <InformationalVersion>$(Major).$(Minor).$(Revision).$(BuildNumber)</InformationalVersion>
