@@ -14,7 +14,9 @@
     <BuildNumber Condition=" '$(BuildNumber)' == '' ">0</BuildNumber>
 
     <PackageId>PushoverNetStandard</PackageId>
-
+    <Description>Simple Pushover API client targeting NetStandard</Description>
+    <Tags>push notifications notification pushover netstandard</Tags>
+    
     <AssemblyVersion>$(Major).$(Minor).$(Revision).$(BuildNumber)</AssemblyVersion>
     <AssemblyFileVersion>$(Major).$(Minor).$(Revision).$(BuildNumber)</AssemblyFileVersion>
     <InformationalVersion>$(Major).$(Minor).$(Revision).$(BuildNumber)</InformationalVersion>
