@@ -22,7 +22,7 @@ test_script:
   - dotnet test .\test\PushoverNet.Test\PushoverNet.Test.csproj --configuration Release --logger:trx;LogFileName=tests-results01.xml
 
 artifacts:
-  - path: '**\PushoverNet.*.nupkg' # find all NuGet packages recursively
+  - path: '**\PushoverNetStandard.*.nupkg' # find all NuGet packages recursively
 
 deploy:
   provider: NuGet
